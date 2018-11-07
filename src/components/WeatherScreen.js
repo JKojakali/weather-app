@@ -47,7 +47,7 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount = async () => {
     try {
-      let cityName = this.props.navigation.state.params.city;
+      let cityName = this.props.navigation.state.params.city;;
 
       let cityDetails = await OpenWeatherApi.Locations(cityName);
 
@@ -147,12 +147,12 @@ export default class HomeScreen extends React.Component {
           <Image style={styles.image} source={{uri:`${image}`}} />
         </View>
         <View style={styles.extraInfoContainer}>
-          <Text textAlign='left' style={styles.extraInfo}>City: {this.props.navigation.state.params.city}</Text>
-          <Text textAlign='left' style={styles.extraInfo}>Daily High: <Text textAlign='right'>{high}°</Text></Text>
-          <Text textAlign='left' style={styles.extraInfo}>Daily Low: {low}°</Text>
-          <Text textAlign='left' style={styles.extraInfo}>Description: {description}</Text>
-          <Text textAlign='left' style={styles.extraInfo}>Wind Speed: {windSpeed} MPH</Text>
-          <Text textAlign='left' style={styles.extraInfo}>Cloud Coverage: {clouds} %</Text>
+          <Text textAlign='left' style={styles.extraInfoDescription}>City: <Text style={styles.extraInfo}>{this.props.navigation.state.params.city}</Text></Text>
+          <Text textAlign='left' style={styles.extraInfoDescription}>Daily High: <Text style={styles.extraInfo}>{high}</Text></Text>
+          <Text textAlign='left' style={styles.extraInfoDescription}>Daily Low: <Text style={styles.extraInfo}>{low}</Text></Text>
+          <Text textAlign='left' style={styles.extraInfoDescription}>Wind Speed: <Text style={styles.extraInfo}>{windSpeed} MPH</Text></Text>
+          <Text textAlign='left' style={styles.extraInfoDescription}>Cloud Coverage: <Text style={styles.extraInfo}>{clouds}%</Text></Text>
+          <Text textAlign='left' style={styles.extraInfoDescription}>Description: <Text style={styles.extraInfo}>{description}</Text></Text>
         </View>
         {this.state.loading === true ? <LoadingScreen visible={true}/> : null}
       </View>
@@ -245,13 +245,20 @@ const styles = StyleSheet.create({
   extraInfoContainer: {
     marginTop: 20,
     marginHorizontal: 10,
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%'
+  },
+  extraInfoDescription: {
+    color: 'white',
+    fontSize: 25,
+    margin: 10,
+    fontWeight: 'bold'
   },
   extraInfo: {
     color: 'white',
     fontSize: 25,
-    margin: 10
+    marginLeft: 10,
+    fontWeight: '300'
   },
 });
