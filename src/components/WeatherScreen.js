@@ -51,19 +51,21 @@ export default class HomeScreen extends React.Component {
 
       let cityDetails = await OpenWeatherApi.Locations(cityName);
 
+      let descriptionForToday = (cityDetails.currentDetailedDescription).charAt(0).toUpperCase() + cityDetails.currentDetailedDescription.slice(1);
+
       setTimeout(() => {
         this.setState({
           currentDailyHigh: cityDetails.currentDailyHigh,
           currentDailyLow: cityDetails.currentDailyLow,
           currentDescription: cityDetails.currentDescription,
-          currentDetailedDescription: cityDetails.currentDetailedDescription,
+          currentDetailedDescription: (cityDetails.currentDetailedDescription).charAt(0).toUpperCase() + cityDetails.currentDetailedDescription.slice(1),
           currentClouds: cityDetails.currentClouds,
           currentWindSpeed: cityDetails.currentWindSpeed,
 
           tomorrowDailyHigh: cityDetails.tomorrowDailyHigh,
           tomorrowDailyLow: cityDetails.tomorrowDailyLow,
           tomorrowDescription: cityDetails.tomorrowDescription,
-          tomorrowDetailedDescription: cityDetails.tomorrowDetailedDescription,
+          tomorrowDetailedDescription: (cityDetails.tomorrowDetailedDescription).charAt(0).toUpperCase() + cityDetails.tomorrowDetailedDescription.slice(1),
           tomorrowClouds: cityDetails.tomorrowClouds,
           tomorrowWindSpeed: cityDetails.tomorrowWindSpeed,
 
@@ -125,7 +127,6 @@ export default class HomeScreen extends React.Component {
       clouds = this.state.tomorrowClouds;
       windSpeed = this.state.tomorrowWindSpeed;
     }
-
     return (
       <View style={styles.rootContainer}>
         <View style={styles.navContainer}>
@@ -240,14 +241,14 @@ const styles = StyleSheet.create({
   image: {
     height: 125,
     width: 125,
-    marginTop: 75,
+    marginTop: 100,
   },
   extraInfoContainer: {
-    marginTop: 20,
+    marginTop: 50,
     marginHorizontal: 10,
     width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingLeft: 40,
   },
   extraInfoDescription: {
     color: 'white',
@@ -256,6 +257,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   extraInfo: {
+    textAlign: 'center',
     color: 'white',
     fontSize: 25,
     marginLeft: 10,

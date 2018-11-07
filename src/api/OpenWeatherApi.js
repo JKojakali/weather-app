@@ -26,9 +26,6 @@ let Locations = async (city) => {
         let date = new Date(todaysData.dt_txt)
         date.setHours(date.getHours() - 6);
 
-        console.log(todaysData.clouds.all);
-        console.log(tomorrowsData.clouds.all);
-
         let cityDetails = {
             currentDailyLow: currentLowInFahrenheit,
             currentDailyHigh: currentHighInFahrenheit,
