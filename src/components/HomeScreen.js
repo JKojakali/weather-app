@@ -6,15 +6,17 @@ import {
   TouchableOpacity,
   Dimensions,
   TextInput,
-  ScrollView 
+  ScrollView,
+  Image
 } from 'react-native';
 
 let defaultCities = [
   'Atlanta',
-  'New York',
+  'Marietta',
   'Hoboken',
   'Newark',
   'Chicago',
+  'Boston'
 ]
 
 export default class HomeScreen extends React.Component {
@@ -66,18 +68,15 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.rootContainer}>
+        <View style={styles.textBoxContainer}>
+          <TextInput style={styles.textBox} placeholder={"Enter a city to get the weather"} placeholderTextColor="white" onChangeText={(text) => this.setState({ text })}/>
+          <TouchableOpacity style={styles.submitButtonContainer} onPress={this.onSubmitButtonPress}>
+              <Text style={{color: 'white', fontSize: 20}}>Submit</Text>
+          </TouchableOpacity>
+        </View>
         <ScrollView style={styles.scrollViewContainer}>
           {this.renderCities()}
         </ScrollView>
-        <View style={styles.textBoxContainer}>
-          <Text style={styles.cityFinderText}>
-            Can't find the city you're looking for? Try and look it up!
-          </Text>
-          <TextInput style={styles.textBox} onChangeText={(text) => this.setState({ text })}/>
-          <TouchableOpacity style={styles.submitButtonContainer} onPress={this.onSubmitButtonPress}>
-            <Text style={styles.submitButtonText}>Submit</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -91,30 +90,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#5FCFFA'
   },
-  scrollViewContainer: {
-    marginTop: 50
-  },
   textBoxContainer: {
-    marginBottom: Dimensions.get('window').height/10,
+    flexDirection:'row',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: Dimensions.get('window').width/5  
+  },
+  image: {
+    height: 10,
+    width: 10,
   },
   textBox: {
     height: 40,
     width: Dimensions.get('window').width/1.4,
     color: 'white',
     paddingLeft: 20,
-    borderRadius: 10,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
     borderColor: 'white',
     borderWidth: 2,
-    marginTop: 20
-  },
-  cityFinderText: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 20,
-    marginTop: 25,
-    marginHorizontal: 20,
+    borderRightWidth: 0,
   },
   buttonContainer: {
     alignItems: 'center',
@@ -124,13 +119,13 @@ const styles = StyleSheet.create({
   submitButtonContainer: {
     width: '100%',
     height: 40,
-    width: Dimensions.get('window').width/1.4,
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    borderRadius: 10,
+    width: Dimensions.get('window').width/5,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderColor: 'white',
+    borderWidth: 2,
   },
   submitButtonText: {
     fontSize: 20

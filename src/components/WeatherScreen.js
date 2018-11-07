@@ -72,7 +72,7 @@ export default class HomeScreen extends React.Component {
           iconUrlForTomorrow: cityDetails.iconUrlForTomorrow,
           loading: false
         })
-      }, 500);
+      }, 750);
 
       // Not the proper way I'd like to handle this, but due to the time constraint I did it this way.
 
@@ -129,31 +129,30 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.rootContainer}>
         <View style={styles.navContainer}>
-          <TouchableOpacity onPress={this.onGoBackButtonPress}>
-            <Text style={styles.backButton}>Back</Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={this.onGoBackButtonPress}>
+              <Text style={styles.backButton}>Back</Text>
+            </TouchableOpacity>
         </View>
         <View style={styles.dayContainer}>
           <View style={styles.todayTomorrowContainer}>
             <TouchableOpacity style={[styles.todayTab, this.state.today === true ? styles.focusedContainer : null]} onPress={() => this.onDayButton('Today')}>
-              <Text style={styles.todayText}>Today</Text>
+              <Text style={[styles.tabText, this.state.today === true ? styles.selectedTabText : null] }>Today</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.tomorrowTab, this.state.tomorrow === true ? styles.focusedContainer : null]} onPress={() => this.onDayButton('Tomorrow')}>
-              <Text style={styles.tomorrowText} >Tomorrow</Text>
+              <Text style={[styles.tabText, this.state.tomorrow === true ? styles.selectedTabText : null]}>Tomorrow</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.imageContiner}>
           <Image style={styles.image} source={{uri:`${image}`}} />
         </View>
-        <View style={styles.highAndLowContainer}>
-          <Text style={styles.highTempText}>{high}°</Text>
-          <Text style={styles.lowTempText}>{low}°</Text>
-        </View>
         <View style={styles.extraInfoContainer}>
-          <Text style={styles.extraInfo}>Description: {description}</Text>
-          <Text style={styles.extraInfo}>Wind Speed: {windSpeed} MPH</Text>
-          <Text style={styles.extraInfo}>Cloud Coverage: {clouds} %</Text>
+          <Text textAlign='left' style={styles.extraInfo}>City: {this.props.navigation.state.params.city}</Text>
+          <Text textAlign='left' style={styles.extraInfo}>Daily High: <Text textAlign='right'>{high}°</Text></Text>
+          <Text textAlign='left' style={styles.extraInfo}>Daily Low: {low}°</Text>
+          <Text textAlign='left' style={styles.extraInfo}>Description: {description}</Text>
+          <Text textAlign='left' style={styles.extraInfo}>Wind Speed: {windSpeed} MPH</Text>
+          <Text textAlign='left' style={styles.extraInfo}>Cloud Coverage: {clouds} %</Text>
         </View>
         {this.state.loading === true ? <LoadingScreen visible={true}/> : null}
       </View>
@@ -172,7 +171,19 @@ const styles = StyleSheet.create({
   navContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    width: '100%'
+    width: '100%',
+    marginBottom: 50
+  },
+  titleContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 40,
+    flex: 2,
+  },
+  title: {
+    color: 'white',
+    fontSize: 40,
+    fontWeight: 'bold',
   },
   dayContainer: {
     justifyContent: 'center',
@@ -180,7 +191,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   focusedContainer: {
-    backgroundColor: '#54B8FB'
+    backgroundColor: 'white'
   },
   todayTomorrowContainer: {
     flexDirection: 'row',
@@ -193,29 +204,27 @@ const styles = StyleSheet.create({
     height: 40,
     width: Dimensions.get('window').width,
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'white',
     justifyContent: 'center',
     flex: 1,
-    marginRight: 20
   },
   tomorrowTab: {
     width: '100%',
     height: 40,
     width: Dimensions.get('window').width,
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'white',
     justifyContent: 'center',
     flex: 1,
-    marginLeft: 20
   },
-  todayText: {
-    color: 'black',
+  tabText: {
+    color: 'white',
     fontSize: 20,
   },
-  tomorrowText: {
-    color: 'black',
+  selectedTabText: {
+    color: '#5FCFFA',
     fontSize: 20,
   },
   backButton: {
@@ -223,7 +232,6 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 25,
     marginLeft: 20,
-    marginBottom: 20
   },
   imageContainer: {
     justifyContent: 'center',
@@ -232,22 +240,18 @@ const styles = StyleSheet.create({
   image: {
     height: 125,
     width: 125,
-    marginTop: 75
-  },
-  highTempText: {
-    color: '#B85C6F',
-    fontSize: 90,
-    marginTop: 15
-  },
-  lowTempText: {
-    color: '#3573FC',
-    fontSize: 90
+    marginTop: 75,
   },
   extraInfoContainer: {
-    marginTop: 60
+    marginTop: 20,
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
   },
   extraInfo: {
     color: 'white',
-    fontSize: 30
+    fontSize: 25,
+    margin: 10
   },
 });
