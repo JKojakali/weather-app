@@ -1,8 +1,3 @@
-So all together it is
-
-
-
-
 # weather-app
 
 This is a weather app that will tell you the weather for today and tomorrow using the OpenWeatherApi.
