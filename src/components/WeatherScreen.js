@@ -149,8 +149,8 @@ export default class HomeScreen extends React.Component {
         </View>
         <View style={styles.extraInfoContainer}>
           <Text textAlign='left' style={styles.extraInfoDescription}>City: <Text style={styles.extraInfo}>{this.props.navigation.state.params.city}</Text></Text>
-          <Text textAlign='left' style={styles.extraInfoDescription}>Daily High: <Text style={styles.extraInfo}>{high}° F</Text></Text>
-          <Text textAlign='left' style={styles.extraInfoDescription}>Daily Low: <Text style={styles.extraInfo}>{low}° F</Text></Text>
+          <Text textAlign='left' style={styles.extraInfoDescription}>Daily High: <Text style={styles.extraInfo}>{high}°F</Text></Text>
+          <Text textAlign='left' style={styles.extraInfoDescription}>Daily Low: <Text style={styles.extraInfo}>{low}°F</Text></Text>
           <Text textAlign='left' style={styles.extraInfoDescription}>Wind Speed: <Text style={styles.extraInfo}>{windSpeed} MPH</Text></Text>
           <Text textAlign='left' style={styles.extraInfoDescription}>Cloud Coverage: <Text style={styles.extraInfo}>{clouds}%</Text></Text>
           <Text textAlign='left' style={styles.extraInfoDescription}>Description: <Text style={styles.extraInfo}>{description}</Text></Text>
